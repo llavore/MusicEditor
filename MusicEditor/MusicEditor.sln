@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30804.86
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MusicEditor.Forms", "MusicEditor.Forms\MusicEditor.Forms.csproj", "{498834BD-D68F-4B6C-B037-66C0D9F1E3CA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MusicEditor.Bussines", "MusicEditor.Bussines\MusicEditor.Bussines.csproj", "{B97E3683-07B8-412C-89F6-4C44A08CB7F8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{498834BD-D68F-4B6C-B037-66C0D9F1E3CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{498834BD-D68F-4B6C-B037-66C0D9F1E3CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{498834BD-D68F-4B6C-B037-66C0D9F1E3CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{498834BD-D68F-4B6C-B037-66C0D9F1E3CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B97E3683-07B8-412C-89F6-4C44A08CB7F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B97E3683-07B8-412C-89F6-4C44A08CB7F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B97E3683-07B8-412C-89F6-4C44A08CB7F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B97E3683-07B8-412C-89F6-4C44A08CB7F8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {921D35AF-FBC1-4EB3-AD28-AA19F4E69285}
+	EndGlobalSection
+EndGlobal

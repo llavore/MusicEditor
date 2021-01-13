@@ -1,0 +1,14 @@
+C:\Users\mLlav\OneDrive\Documentos\GitHub\MusicEditor\MusicEditor\MusicEditor.Forms\bin\Debug\MusicEditor.Forms.exe.config
+C:\Users\mLlav\OneDrive\Documentos\GitHub\MusicEditor\MusicEditor\MusicEditor.Forms\bin\Debug\MusicEditor.Forms.exe
+C:\Users\mLlav\OneDrive\Documentos\GitHub\MusicEditor\MusicEditor\MusicEditor.Forms\bin\Debug\MusicEditor.Forms.pdb
+C:\Users\mLlav\OneDrive\Documentos\GitHub\MusicEditor\MusicEditor\MusicEditor.Forms\obj\Debug\MusicEditor.Forms.csprojAssemblyReference.cache
+C:\Users\mLlav\OneDrive\Documentos\GitHub\MusicEditor\MusicEditor\MusicEditor.Forms\obj\Debug\MusicEditor.Forms.Properties.Resources.resources
+C:\Users\mLlav\OneDrive\Documentos\GitHub\MusicEditor\MusicEditor\MusicEditor.Forms\obj\Debug\MusicEditor.Forms.csproj.GenerateResource.cache
+C:\Users\mLlav\OneDrive\Documentos\GitHub\MusicEditor\MusicEditor\MusicEditor.Forms\obj\Debug\MusicEditor.Forms.csproj.CoreCompileInputs.cache
+C:\Users\mLlav\OneDrive\Documentos\GitHub\MusicEditor\MusicEditor\MusicEditor.Forms\obj\Debug\MusicEditor.Forms.exe
+C:\Users\mLlav\OneDrive\Documentos\GitHub\MusicEditor\MusicEditor\MusicEditor.Forms\obj\Debug\MusicEditor.Forms.pdb
+C:\Users\mLlav\OneDrive\Documentos\GitHub\MusicEditor\MusicEditor\MusicEditor.Forms\bin\Debug\MusicEditor.Bussines.dll
+C:\Users\mLlav\OneDrive\Documentos\GitHub\MusicEditor\MusicEditor\MusicEditor.Forms\bin\Debug\MusicEditor.Bussines.pdb
+C:\Users\mLlav\OneDrive\Documentos\GitHub\MusicEditor\MusicEditor\MusicEditor.Forms\obj\Debug\MusicEditor.Forms.FormGestion.resources
+C:\Users\mLlav\OneDrive\Documentos\GitHub\MusicEditor\MusicEditor\MusicEditor.Forms\obj\Debug\MusicEditor.Forms.FormInicial.resources
+C:\Users\mLlav\OneDrive\Documentos\GitHub\MusicEditor\MusicEditor\MusicEditor.Forms\obj\Debug\MusicEditor.Forms.csproj.CopyComplete
