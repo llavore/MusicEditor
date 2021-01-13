@@ -18,6 +18,8 @@ namespace MusicEditor.Bussines.APIs
         List<String> ObtenerGrupos();
 
         int totalMusica();
+
+        int CantidadMusicaategoria();
     }
 
     public enum MusicColumns { 
@@ -52,23 +54,24 @@ namespace MusicEditor.Bussines.APIs
             var allFiles = Directory.GetFiles(_path, "*.mp3",SearchOption.AllDirectories);
             if (allFiles.Length > 0)
             {
-                var enumerator = allFiles.GetEnumerator();
-                enumerator.MoveNext();
-                var current = enumerator.Current;
+                var musicList = allFiles.ToList();
+                
+                
                 FileInfo file;
                 Regex r = new Regex(@"([A-Z]{3}[0-9]{3}([ ])-([ ])([\S, ]+)([ ])-([ ])([\S, ]+).mp3)");
-                while (enumerator.MoveNext())
+                foreach (var path in musicList )
                 {
-                    current = enumerator.Current;
-                    file = new FileInfo(current.ToString());
+                    file = new FileInfo(path);
                     DataRow row;
                     //Console.WriteLine(file.Name +( r.IsMatch(file.Name) ? " correcte" : " incorrecte"));
-                    String[] items = new String[6];
 
+                    String[] items = new String[6];
                     items[(int)MusicColumns.Path] = file.FullName;
 
                     if (r.IsMatch(file.Name))
                     {
+                       
+
                         var NameSeparate = file.Name.Split('-');
                         items[(int)MusicColumns.Category] = NameSeparate[0].Substring(0, 3);
                         items[(int)MusicColumns.Group] = NameSeparate[2].Split('.')[0].Trim();
@@ -92,7 +95,10 @@ namespace MusicEditor.Bussines.APIs
                     row.ItemArray = items;
                     _table.Rows.Add(row);
                 }
+
+               
             }
+            
         }
 
         public List<string> ObtenerGrupos()
@@ -112,7 +118,7 @@ namespace MusicEditor.Bussines.APIs
         {
             DataView dv = new DataView(_table);
             dv.RowFilter = "State = " + Boolean.TrueString;
-
+            dv.Sort = "Category, Number ";
             return dv;
         }
 
@@ -127,5 +133,14 @@ namespace MusicEditor.Bussines.APIs
         {
             return _table.AsEnumerable().Count();
         }
+
+        public int CantidadMusicaategoria() {
+            var list = _table.AsEnumerable().GroupBy(x => x.ItemArray[(int)MusicColumns.Category])
+                .Select(x => new String[2] { x.Key.ToString(), x.ToList().Count().ToString() }).ToList();
+                
+           
+            return 0;
+        }
+        
     }
 }

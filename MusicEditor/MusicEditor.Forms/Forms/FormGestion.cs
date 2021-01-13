@@ -32,6 +32,8 @@ namespace MusicEditor.Forms
 
                 gridMusicaIncorrecta.LoadData(_api.ObtenerTodosIncorrectos());
                 gridMusicaIncorrecta.GridStyleMusicaIncorrecta();
+
+                
             }
             else
             {
