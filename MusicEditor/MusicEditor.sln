@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MusicEditor.Forms", "MusicE
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MusicEditor.Bussines", "MusicEditor.Bussines\MusicEditor.Bussines.csproj", "{B97E3683-07B8-412C-89F6-4C44A08CB7F8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MusicEditor.Ressources", "MusicEditor.Ressources\MusicEditor.Ressources.csproj", "{0FA7915D-DA85-4240-987C-845F86BC28EE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{B97E3683-07B8-412C-89F6-4C44A08CB7F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B97E3683-07B8-412C-89F6-4C44A08CB7F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B97E3683-07B8-412C-89F6-4C44A08CB7F8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0FA7915D-DA85-4240-987C-845F86BC28EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0FA7915D-DA85-4240-987C-845F86BC28EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0FA7915D-DA85-4240-987C-845F86BC28EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0FA7915D-DA85-4240-987C-845F86BC28EE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

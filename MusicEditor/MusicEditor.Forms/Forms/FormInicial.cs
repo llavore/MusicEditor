@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MusicEditor.Forms.Helpers;
+using MusicEditor.Ressources;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -28,6 +30,9 @@ namespace MusicEditor.Forms
             }
         }
 
-
+        private void FormInicial_Load(object sender, EventArgs e)
+        {
+            this.Text = Nombres.FormInicial;
+        }
     }
 }

@@ -87,6 +87,7 @@ namespace MusicEditor.Forms
             this.Name = "FormInicial";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Pantalla Principal";
+            this.Load += new System.EventHandler(this.FormInicial_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -1,0 +1,9 @@
+C:\Users\mLlav\OneDrive\Documentos\GitHub\MusicEditor\MusicEditor\MusicEditor.Ressources\bin\Debug\MusicEditor.Ressources.dll
+C:\Users\mLlav\OneDrive\Documentos\GitHub\MusicEditor\MusicEditor\MusicEditor.Ressources\bin\Debug\MusicEditor.Ressources.pdb
+C:\Users\mLlav\OneDrive\Documentos\GitHub\MusicEditor\MusicEditor\MusicEditor.Ressources\obj\Debug\MusicEditor.Ressources.csprojAssemblyReference.cache
+C:\Users\mLlav\OneDrive\Documentos\GitHub\MusicEditor\MusicEditor\MusicEditor.Ressources\obj\Debug\MusicEditor.Ressources.Nombres.resources
+C:\Users\mLlav\OneDrive\Documentos\GitHub\MusicEditor\MusicEditor\MusicEditor.Ressources\obj\Debug\MusicEditor.Ressources.csproj.GenerateResource.cache
+C:\Users\mLlav\OneDrive\Documentos\GitHub\MusicEditor\MusicEditor\MusicEditor.Ressources\obj\Debug\MusicEditor.Ressources.csproj.CoreCompileInputs.cache
+C:\Users\mLlav\OneDrive\Documentos\GitHub\MusicEditor\MusicEditor\MusicEditor.Ressources\obj\Debug\MusicEditor.Ressources.dll
+C:\Users\mLlav\OneDrive\Documentos\GitHub\MusicEditor\MusicEditor\MusicEditor.Ressources\obj\Debug\MusicEditor.Ressources.pdb
+C:\Users\mLlav\OneDrive\Documentos\GitHub\MusicEditor\MusicEditor\MusicEditor.Ressources\obj\Debug\MusicEditor.Ressources.Mensajes.resources

@@ -18,8 +18,7 @@ namespace MusicEditor.Bussines.APIs
         List<String> ObtenerGrupos();
 
         int totalMusica();
-
-        int CantidadMusicaategoria();
+        List<String[]> CantidadMusicaCategoria();
     }
 
     public enum MusicColumns { 
@@ -134,12 +133,10 @@ namespace MusicEditor.Bussines.APIs
             return _table.AsEnumerable().Count();
         }
 
-        public int CantidadMusicaategoria() {
+        public List<String[]> CantidadMusicaCategoria() {
             var list = _table.AsEnumerable().GroupBy(x => x.ItemArray[(int)MusicColumns.Category])
                 .Select(x => new String[2] { x.Key.ToString(), x.ToList().Count().ToString() }).ToList();
-                
-           
-            return 0;
+            return list;
         }
         
     }

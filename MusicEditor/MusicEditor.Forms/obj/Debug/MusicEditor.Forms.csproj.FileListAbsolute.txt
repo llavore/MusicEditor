@@ -12,3 +12,5 @@ C:\Users\mLlav\OneDrive\Documentos\GitHub\MusicEditor\MusicEditor\MusicEditor.Fo
 C:\Users\mLlav\OneDrive\Documentos\GitHub\MusicEditor\MusicEditor\MusicEditor.Forms\obj\Debug\MusicEditor.Forms.FormGestion.resources
 C:\Users\mLlav\OneDrive\Documentos\GitHub\MusicEditor\MusicEditor\MusicEditor.Forms\obj\Debug\MusicEditor.Forms.FormInicial.resources
 C:\Users\mLlav\OneDrive\Documentos\GitHub\MusicEditor\MusicEditor\MusicEditor.Forms\obj\Debug\MusicEditor.Forms.csproj.CopyComplete
+C:\Users\mLlav\OneDrive\Documentos\GitHub\MusicEditor\MusicEditor\MusicEditor.Forms\bin\Debug\MusicEditor.Ressources.dll
+C:\Users\mLlav\OneDrive\Documentos\GitHub\MusicEditor\MusicEditor\MusicEditor.Forms\bin\Debug\MusicEditor.Ressources.pdb

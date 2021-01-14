@@ -60,6 +60,7 @@
     </Compile>
     <Compile Include="Helpers\DataGridViewExtensions.cs" />
     <Compile Include="Helpers\MessageHelper.cs" />
+    <Compile Include="Helpers\TextosHelper.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\FormGestion.resx">
@@ -94,6 +95,10 @@
     <ProjectReference Include="..\MusicEditor.Bussines\MusicEditor.Bussines.csproj">
       <Project>{b97e3683-07b8-412c-89f6-4c44a08cb7f8}</Project>
       <Name>MusicEditor.Bussines</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MusicEditor.Ressources\MusicEditor.Ressources.csproj">
+      <Project>{0fa7915d-da85-4240-987c-845f86bc28ee}</Project>
+      <Name>MusicEditor.Ressources</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

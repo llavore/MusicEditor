@@ -1,5 +1,7 @@
 ﻿using MusicEditor.Bussines.APIs;
+using MusicEditor.Forms.Helpers;
 using MusicEditor.Helpers;
+using MusicEditor.Ressources;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -20,6 +22,7 @@ namespace MusicEditor.Forms
         public FormGestion(string path)
         {
             InitializeComponent();
+            this.Text = Nombres.FormGestion;
             _path = path;
             _api = new MusicAPI(_path);
         }
@@ -39,7 +42,7 @@ namespace MusicEditor.Forms
             {
                 gridMusicaCorrecta.ClearColumns().DataSource = null;
                 gridMusicaIncorrecta.ClearColumns().DataSource = null;
-                MessageHelper.InfoMessage("Lo sentimos pero no hemos encontrado canciones para mostrar.");
+                MessageHelper.InfoMessage(Mensajes.SinFicherosMusica);
 
             }
 
@@ -54,7 +57,7 @@ namespace MusicEditor.Forms
             using (var dialog = new FolderBrowserDialog())
             {
 
-               bool result = MessageHelper.QuestionMessage("Seguro que quieres cambiar de carpeta? Los datos modificados actuales de perderan");
+               bool result = MessageHelper.QuestionMessage(Mensajes.ConfirmacionSalirSinGuardar);
                 if (result && dialog.ShowDialog() == DialogResult.OK)
                 {
                     _path = dialog.SelectedPath;
@@ -62,6 +65,11 @@ namespace MusicEditor.Forms
                     configuracionInicial();
                 }
             }
+        }
+
+        private void btnGuardarCambios_Click(object sender, EventArgs e)
+        {
+            MessageHelper.InfoMessage(Mensajes.FuncionNoImplementada);
         }
     }
 }
