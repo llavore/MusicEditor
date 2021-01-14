@@ -60,7 +60,6 @@
     </Compile>
     <Compile Include="Helpers\DataGridViewExtensions.cs" />
     <Compile Include="Helpers\MessageHelper.cs" />
-    <Compile Include="Helpers\TextosHelper.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\FormGestion.resx">

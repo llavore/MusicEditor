@@ -1,5 +1,4 @@
 ﻿using MusicEditor.Bussines.APIs;
-using MusicEditor.Forms.Helpers;
 using MusicEditor.Helpers;
 using MusicEditor.Ressources;
 using System;
@@ -70,6 +69,28 @@ namespace MusicEditor.Forms
         private void btnGuardarCambios_Click(object sender, EventArgs e)
         {
             MessageHelper.InfoMessage(Mensajes.FuncionNoImplementada);
+        }
+
+        private void gridMusicaIncorrecta_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (gridMusicaIncorrecta.Rows[e.RowIndex].Cells[e.ColumnIndex] is DataGridViewButtonCell)
+            {
+
+                MessageHelper.InfoMessage(Mensajes.FuncionNoImplementada);
+            }
+        }
+
+        private void gridMusicaCorrecta_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+            
+            
+            //DataGridViewButtonCell btn = (DataGridViewButtonCell) gridMusicaCorrecta.Rows[e.RowIndex].Cells[e.ColumnIndex];
+            if (gridMusicaCorrecta.Rows[e.RowIndex].Cells[e.ColumnIndex] is DataGridViewButtonCell)
+            {
+
+                MessageHelper.InfoMessage(Mensajes.FuncionNoImplementada);
+            }
         }
     }
 }

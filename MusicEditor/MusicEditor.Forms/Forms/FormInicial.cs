@@ -1,4 +1,4 @@
-﻿using MusicEditor.Forms.Helpers;
+﻿
 using MusicEditor.Ressources;
 using System;
 using System.Collections.Generic;

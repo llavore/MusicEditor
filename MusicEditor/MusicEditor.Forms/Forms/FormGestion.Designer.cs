@@ -102,6 +102,7 @@ namespace MusicEditor.Forms
             this.gridMusicaCorrecta.RowTemplate.Height = 24;
             this.gridMusicaCorrecta.Size = new System.Drawing.Size(834, 294);
             this.gridMusicaCorrecta.TabIndex = 1;
+            this.gridMusicaCorrecta.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridMusicaCorrecta_CellContentClick);
             // 
             // tabMusica
             // 
@@ -167,6 +168,7 @@ namespace MusicEditor.Forms
             this.gridMusicaIncorrecta.RowTemplate.Height = 24;
             this.gridMusicaIncorrecta.Size = new System.Drawing.Size(834, 294);
             this.gridMusicaIncorrecta.TabIndex = 0;
+            this.gridMusicaIncorrecta.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridMusicaIncorrecta_CellContentClick);
             // 
             // toolAcciones
             // 
