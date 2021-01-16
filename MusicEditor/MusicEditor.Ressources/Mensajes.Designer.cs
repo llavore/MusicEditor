@@ -61,6 +61,15 @@ namespace MusicEditor.Ressources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Nota: si selecciona un numero que ya pertecene a otra pista, los numeros se intercanviaran.
+        /// </summary>
+        public static string AvisoNumeroMusica {
+            get {
+                return ResourceManager.GetString("AvisoNumeroMusica", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Seguro que quieres cambiar de carpeta? Los datos modificados actuales de perderan.
         /// </summary>
         public static string ConfirmacionSalirSinGuardar {

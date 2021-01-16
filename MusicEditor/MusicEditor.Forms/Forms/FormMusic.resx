@@ -117,16 +117,4 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AvisoNumeroMusica" xml:space="preserve">
-    <value>Nota: si selecciona un numero que ya pertecene a otra pista, los numeros se intercanviaran</value>
-  </data>
-  <data name="ConfirmacionSalirSinGuardar" xml:space="preserve">
-    <value>Seguro que quieres cambiar de carpeta? Los datos modificados actuales de perderan</value>
-  </data>
-  <data name="FuncionNoImplementada" xml:space="preserve">
-    <value>Esta función aun no ha sido implementada</value>
-  </data>
-  <data name="SinFicherosMusica" xml:space="preserve">
-    <value>Lo sentimos, no hemos encontrado canciones para mostrar.</value>
-  </data>
 </root>

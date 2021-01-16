@@ -1,4 +1,5 @@
 ﻿using MusicEditor.Bussines.APIs;
+using MusicEditor.Forms.Forms;
 using MusicEditor.Helpers;
 using MusicEditor.Ressources;
 using System;
@@ -17,6 +18,7 @@ namespace MusicEditor.Forms
     {
         private string _path;
         private IMusicApi _api;
+        private Boolean _activated;
 
         public FormGestion(string path)
         {
@@ -24,25 +26,25 @@ namespace MusicEditor.Forms
             this.Text = Nombres.FormGestion;
             _path = path;
             _api = new MusicAPI(_path);
+            _activated = false;
+
         }
         private void configuracionInicial() {
             txtPathFolder.Text = _path;
 
             if(_api.totalMusica() > 0) { 
+               
                 gridMusicaCorrecta.LoadData(_api.ObtenerTodosCorrectos());
                 gridMusicaCorrecta.GridStyleMusicaCorrecta();
 
                 gridMusicaIncorrecta.LoadData(_api.ObtenerTodosIncorrectos());
                 gridMusicaIncorrecta.GridStyleMusicaIncorrecta();
-
-                
             }
             else
             {
                 gridMusicaCorrecta.ClearColumns().DataSource = null;
                 gridMusicaIncorrecta.ClearColumns().DataSource = null;
                 MessageHelper.InfoMessage(Mensajes.SinFicherosMusica);
-
             }
 
         }
@@ -55,7 +57,6 @@ namespace MusicEditor.Forms
         {
             using (var dialog = new FolderBrowserDialog())
             {
-
                bool result = MessageHelper.QuestionMessage(Mensajes.ConfirmacionSalirSinGuardar);
                 if (result && dialog.ShowDialog() == DialogResult.OK)
                 {
@@ -66,31 +67,91 @@ namespace MusicEditor.Forms
             }
         }
 
-        private void btnGuardarCambios_Click(object sender, EventArgs e)
-        {
-            MessageHelper.InfoMessage(Mensajes.FuncionNoImplementada);
-        }
-
         private void gridMusicaIncorrecta_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (gridMusicaIncorrecta.Rows[e.RowIndex].Cells[e.ColumnIndex] is DataGridViewButtonCell)
+            DataGridViewButtonCell btn = (DataGridViewButtonCell)gridMusicaIncorrecta.Rows[e.RowIndex].Cells[e.ColumnIndex];
+            if (btn is DataGridViewButtonCell)
             {
+                if (btn.Value.ToString() == "Modificar")
+                {
+                    //int indexColumn = gridMusicaIncorrecta.Columns.
+                    string path = "";
+                    DataRow dr = _api.ObtenerMusica(path);
+                    FormMusic formMusic = new FormMusic(dr, _api);
+                    formMusic.ShowDialog();
+                }
 
-                MessageHelper.InfoMessage(Mensajes.FuncionNoImplementada);
+                if (btn.Value.ToString() == "Eliminar")
+                {
+                    MessageHelper.InfoMessage(Mensajes.FuncionNoImplementada);
+                }
+
             }
         }
 
         private void gridMusicaCorrecta_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-
-            
-            
-            //DataGridViewButtonCell btn = (DataGridViewButtonCell) gridMusicaCorrecta.Rows[e.RowIndex].Cells[e.ColumnIndex];
-            if (gridMusicaCorrecta.Rows[e.RowIndex].Cells[e.ColumnIndex] is DataGridViewButtonCell)
+            DataGridViewCell btn = gridMusicaCorrecta.Rows[e.RowIndex].Cells[e.ColumnIndex];
+            if (btn is DataGridViewButtonCell)
             {
+                if (btn.Value.ToString() == "Modificar") 
+                {
+                    string path = gridMusicaCorrecta.Rows[e.RowIndex].Cells[5].Value.ToString();
+                    OpenFormMusic(path);
+                }
+                else if (btn.Value.ToString() == "Eliminar")
+                {
+                    MessageHelper.InfoMessage(Mensajes.FuncionNoImplementada);
+                }
 
-                MessageHelper.InfoMessage(Mensajes.FuncionNoImplementada);
             }
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            MessageHelper.InfoMessage(Mensajes.FuncionNoImplementada);
+        }
+
+        private void gridMusicaIncorrecta_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
+        {
+
+            DataGridViewCell btn = gridMusicaIncorrecta.Rows[e.RowIndex].Cells[e.ColumnIndex];
+            if (btn is DataGridViewButtonCell)
+            {
+                if (btn.Value.ToString() == "Modificar")
+                {
+                    string path = gridMusicaIncorrecta.Rows[e.RowIndex].Cells[7].Value.ToString();
+                    OpenFormMusic(path);
+
+                }
+                else if(btn.Value.ToString() == "Eliminar")
+                {
+                    MessageHelper.InfoMessage(Mensajes.FuncionNoImplementada);
+                }
+
+            }
+        }
+
+        private void FormGestion_Activated(object sender, EventArgs e)
+        {
+            if (_activated)
+            {
+                gridMusicaCorrecta.LoadData(_api.ObtenerTodosCorrectos());
+                gridMusicaCorrecta.GridStyleMusicaCorrecta();
+
+                gridMusicaIncorrecta.LoadData(_api.ObtenerTodosIncorrectos());
+                gridMusicaIncorrecta.GridStyleMusicaIncorrecta();
+
+                _activated = false;
+            }
+        }
+
+        private void OpenFormMusic(string path) {
+            _activated = true;
+
+            DataRow dr = _api.ObtenerMusica(path);
+            FormMusic formMusic = new FormMusic(dr, _api);
+            formMusic.ShowDialog();
         }
     }
 }

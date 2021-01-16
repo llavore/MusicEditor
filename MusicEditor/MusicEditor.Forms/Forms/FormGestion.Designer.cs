@@ -29,6 +29,7 @@ namespace MusicEditor.Forms
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormGestion));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnChangeFolder = new System.Windows.Forms.Button();
             this.txtPathFolder = new System.Windows.Forms.TextBox();
@@ -38,10 +39,10 @@ namespace MusicEditor.Forms
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.lblMusicaCorrecta = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.lblMusicaIncorrecta = new System.Windows.Forms.Label();
             this.gridMusicaIncorrecta = new System.Windows.Forms.DataGridView();
+            this.lblMusicaIncorrecta = new System.Windows.Forms.Label();
             this.toolAcciones = new System.Windows.Forms.ToolStrip();
-            this.btnGuardarCambios = new System.Windows.Forms.ToolStripLabel();
+            this.btnSave = new System.Windows.Forms.ToolStripButton();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridMusicaCorrecta)).BeginInit();
             this.tabMusica.SuspendLayout();
@@ -137,8 +138,8 @@ namespace MusicEditor.Forms
             // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.lblMusicaIncorrecta);
             this.tabPage2.Controls.Add(this.gridMusicaIncorrecta);
+            this.tabPage2.Controls.Add(this.lblMusicaIncorrecta);
             this.tabPage2.Location = new System.Drawing.Point(4, 25);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
@@ -146,6 +147,20 @@ namespace MusicEditor.Forms
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Musica Incorrecta";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // gridMusicaIncorrecta
+            // 
+            this.gridMusicaIncorrecta.AllowUserToAddRows = false;
+            this.gridMusicaIncorrecta.AllowUserToDeleteRows = false;
+            this.gridMusicaIncorrecta.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gridMusicaIncorrecta.Location = new System.Drawing.Point(32, 57);
+            this.gridMusicaIncorrecta.Name = "gridMusicaIncorrecta";
+            this.gridMusicaIncorrecta.ReadOnly = true;
+            this.gridMusicaIncorrecta.RowHeadersWidth = 51;
+            this.gridMusicaIncorrecta.RowTemplate.Height = 24;
+            this.gridMusicaIncorrecta.Size = new System.Drawing.Size(834, 294);
+            this.gridMusicaIncorrecta.TabIndex = 2;
+            this.gridMusicaIncorrecta.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridMusicaIncorrecta_CellContentClick_1);
             // 
             // lblMusicaIncorrecta
             // 
@@ -156,37 +171,26 @@ namespace MusicEditor.Forms
             this.lblMusicaIncorrecta.TabIndex = 1;
             this.lblMusicaIncorrecta.Text = "Musica con formato incorrecto:";
             // 
-            // gridMusicaIncorrecta
-            // 
-            this.gridMusicaIncorrecta.AllowUserToAddRows = false;
-            this.gridMusicaIncorrecta.AllowUserToDeleteRows = false;
-            this.gridMusicaIncorrecta.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.gridMusicaIncorrecta.Location = new System.Drawing.Point(31, 53);
-            this.gridMusicaIncorrecta.Name = "gridMusicaIncorrecta";
-            this.gridMusicaIncorrecta.ReadOnly = true;
-            this.gridMusicaIncorrecta.RowHeadersWidth = 51;
-            this.gridMusicaIncorrecta.RowTemplate.Height = 24;
-            this.gridMusicaIncorrecta.Size = new System.Drawing.Size(834, 294);
-            this.gridMusicaIncorrecta.TabIndex = 0;
-            this.gridMusicaIncorrecta.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridMusicaIncorrecta_CellContentClick);
-            // 
             // toolAcciones
             // 
             this.toolAcciones.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolAcciones.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btnGuardarCambios});
+            this.btnSave});
             this.toolAcciones.Location = new System.Drawing.Point(0, 0);
             this.toolAcciones.Name = "toolAcciones";
-            this.toolAcciones.Size = new System.Drawing.Size(957, 25);
+            this.toolAcciones.Size = new System.Drawing.Size(957, 27);
             this.toolAcciones.TabIndex = 3;
             this.toolAcciones.Text = "toolAcciones";
             // 
-            // btnGuardarCambios
+            // btnSave
             // 
-            this.btnGuardarCambios.Name = "btnGuardarCambios";
-            this.btnGuardarCambios.Size = new System.Drawing.Size(124, 22);
-            this.btnGuardarCambios.Text = "Guardar Cambios";
-            this.btnGuardarCambios.Click += new System.EventHandler(this.btnGuardarCambios_Click);
+            this.btnSave.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnSave.Image = ((System.Drawing.Image)(resources.GetObject("btnSave.Image")));
+            this.btnSave.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(29, 24);
+            this.btnSave.Text = "toolStripButton1";
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // FormGestion
             // 
@@ -199,6 +203,7 @@ namespace MusicEditor.Forms
             this.Name = "FormGestion";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FormGestion";
+            this.Activated += new System.EventHandler(this.FormGestion_Activated);
             this.Load += new System.EventHandler(this.FormGestion_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -225,11 +230,11 @@ namespace MusicEditor.Forms
         private System.Windows.Forms.TabControl tabMusica;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.DataGridView gridMusicaIncorrecta;
         private System.Windows.Forms.Button btnChangeFolder;
         private System.Windows.Forms.Label lblMusicaCorrecta;
         private System.Windows.Forms.Label lblMusicaIncorrecta;
         private System.Windows.Forms.ToolStrip toolAcciones;
-        private System.Windows.Forms.ToolStripLabel btnGuardarCambios;
+        private System.Windows.Forms.ToolStripButton btnSave;
+        private System.Windows.Forms.DataGridView gridMusicaIncorrecta;
     }
 }
