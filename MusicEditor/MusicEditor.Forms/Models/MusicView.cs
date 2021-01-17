@@ -49,10 +49,10 @@ namespace MusicEditor.Forms.Models
 
         public string[] toArray() {
             string[] array = new string[6];
-            array[0] = category;
-            array[1] = incluirCeros(number.ToString(), 3);
-            array[2] = title;
-            array[3] = group;
+            array[0] = (category != null) ? category : "---";
+            array[1] = number.ToString() ;
+            array[2] = (title != null ) ? title : "---"; 
+            array[3] = (group != null) ? group : "---";
             array[4] = Boolean.TrueString;
             array[5] = path;
             return array;

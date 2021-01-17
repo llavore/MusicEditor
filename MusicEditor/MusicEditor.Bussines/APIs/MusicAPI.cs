@@ -19,8 +19,11 @@ namespace MusicEditor.Bussines.APIs
         List<String> ObtenerGrupos();
         List<String> ObtenerCategorias();
         DataRow ObtenerMusica(string path);
-        DataRow ObtenerMusica(string categoria, string numero);
+        DataRow ObtenerMusica(string categoria, int numero);
+        List<DataRow> SeleccionarMusicaAPartirDeUnNumero(string categoria, int numero);
         int totalMusicaCategoria(string categoria);
+
+        DataRow NuevaLinea();
 
         int totalMusica();
         List<String[]> CantidadMusicaCategoria();
@@ -30,7 +33,6 @@ namespace MusicEditor.Bussines.APIs
 
     public enum MusicColumns
     {
-
         Category = 0,
         Number = 1,
         Title = 2,
@@ -49,7 +51,9 @@ namespace MusicEditor.Bussines.APIs
 
             DataColumn[] columnKey = new DataColumn[2];
             DataColumn keyNumber= new DataColumn();
+            keyNumber.DataType = System.Type.GetType("System.Int32"); 
             keyNumber.ColumnName = "Number";
+
             DataColumn keyCategory = new DataColumn();
             keyCategory.ColumnName = "Category";
 
@@ -68,7 +72,58 @@ namespace MusicEditor.Bussines.APIs
             LoadMusic();
         }
 
+        /*public void LoadMusic()
+        {
+            var allFiles = Directory.GetFiles(_path, "*.mp3", SearchOption.AllDirectories);
+            int countMusicaIncorrecta = 1;
+            if (allFiles.Length > 0)
+            {
+                var musicList = allFiles.ToList();
+                FileInfo file;
+                Regex r = new Regex(@"([A-Z]{3}[0-9]{3}([ ])-([ ])([\S, ]+)([ ])-([ ])([\S, ]+).mp3)");
+                foreach (var path in musicList)
+                {
+                    file = new FileInfo(path);
+                    DataRow row;
+                    //Console.WriteLine(file.Name +( r.IsMatch(file.Name) ? " correcte" : " incorrecte"));
 
+                    //String[] items = new String[6];
+                    //items[(int)MusicColumns.Path] = file.FullName;
+
+                    MusicView musicFile;
+
+                    if (r.IsMatch(file.Name))
+                    {
+                        
+
+                        var NameSeparate = file.Name.Split('-');
+                        musicFile = new MusicView(NameSeparate[0].Substring(0, 3).Trim());
+
+                        items[(int)MusicColumns.Category] = NameSeparate[0].Substring(0, 3).Trim();
+                        items[(int)MusicColumns.Group] = NameSeparate[2].Split('.')[0].Trim();
+                        items[(int)MusicColumns.Number] = NameSeparate[0].Substring(3, 4).Trim();
+                        items[(int)MusicColumns.Title] = NameSeparate[1].Trim().Trim();
+                        items[(int)MusicColumns.State] = Boolean.TrueString;
+
+                    }
+                    else
+                    {
+                        items[(int)MusicColumns.Category] = "---";
+                        items[(int)MusicColumns.Group] = "---";
+                        items[(int)MusicColumns.Number] = countMusicaIncorrecta.ToString();
+                        items[(int)MusicColumns.Title] = "---";
+                        items[(int)MusicColumns.State] = Boolean.FalseString;
+                        countMusicaIncorrecta++;
+                    }
+                    row = _table.NewRow();
+                    row.ItemArray = items;
+                    _table.Rows.Add(row);
+                }
+
+
+            }
+
+        }*/
 
         public void LoadMusic()
         {
@@ -104,7 +159,7 @@ namespace MusicEditor.Bussines.APIs
                     }
                     else
                     {
-                        items[(int)MusicColumns.Category] = "---";
+                        items[(int)MusicColumns.Category] = "unkown";
                         items[(int)MusicColumns.Group] = "---";
                         items[(int)MusicColumns.Number] = countMusicaIncorrecta.ToString();
                         items[(int)MusicColumns.Title] = "---";
@@ -120,6 +175,8 @@ namespace MusicEditor.Bussines.APIs
             }
 
         }
+
+
 
         public List<string> ObtenerGrupos()
         {
@@ -170,11 +227,16 @@ namespace MusicEditor.Bussines.APIs
             return rowSelected;
         }
 
-        public DataRow ObtenerMusica(string categoria, string numero)
+        public DataRow ObtenerMusica(string categoria, int numero)
         {
+            /* DataRow rowSelected = _table.AsEnumerable()
+                                     .Where(x => x.ItemArray[(int)MusicColumns.Category] == categoria &&
+                                      Int32.Parse(x.ItemArray[(int)MusicColumns.Number].ToString()) == 33)
+                                     .FirstOrDefault();*/
+
             DataRow rowSelected = _table.AsEnumerable()
-                                    .Where(x => x.ItemArray[(int)MusicColumns.Category] == categoria &&
-                                     x.ItemArray[(int)MusicColumns.Number] == numero)
+                                    .Where(x => x.ItemArray[0].ToString() == categoria &&
+                                     Int32.Parse(x.ItemArray[1].ToString()) == numero)
                                     .FirstOrDefault();
 
             return rowSelected;
@@ -200,12 +262,46 @@ namespace MusicEditor.Bussines.APIs
             if (state) {
                 DataRow lineaOriginal = ObtenerMusica(liniaModificada[(int)MusicColumns.Path].ToString());
                 DataRow lineaExistente = ObtenerMusica(liniaModificada[(int)MusicColumns.Category].ToString(),
-                    liniaModificada[(int)MusicColumns.Number].ToString());
+                   Int32.Parse(liniaModificada[(int)MusicColumns.Number].ToString()));
                 if (!Boolean.Parse(lineaOriginal[(int)MusicColumns.State].ToString()) && lineaExistente == null)
                 {
                     lineaOriginal.ItemArray = liniaModificada;
                 }
+                else if (!Boolean.Parse(lineaOriginal[(int)MusicColumns.State].ToString()) && lineaExistente != null)
+                {
+                   
+                    List<DataRow> listaMod = SeleccionarMusicaAPartirDeUnNumero(liniaModificada[(int)MusicColumns.Category].ToString(), Int32.Parse(liniaModificada[(int)MusicColumns.Number].ToString()));
+                    listaMod.ForEach(
+                        x => {
+                            //Console.WriteLine(x.ItemArray[(int)MusicColumns.Category].ToString()+ " "+ x.ItemArray[(int)MusicColumns.Number].ToString());
+                            var array = x.ItemArray.ToList();
+                            array[1] = Int32.Parse(x.ItemArray[1].ToString()) + 1 ;
+                            x.ItemArray = array.ToArray();
+                        });
+                    lineaExistente = null;
+                    lineaOriginal.ItemArray = liniaModificada;
+                }
             }
+        }
+
+        public DataRow NuevaLinea()
+        {
+            
+            return _table.NewRow();
+        }
+
+        public  List<DataRow> SeleccionarMusicaAPartirDeUnNumero(string categoria, int numero)
+        {
+            DataView dv = _table.DefaultView;
+            dv.Sort = "Category, Number ";
+            _table = dv.ToTable();
+
+            var rowSelected = _table.AsEnumerable()
+                                      .Where(x => x.ItemArray[0].ToString() == categoria &&
+                                       Int32.Parse(x.ItemArray[1].ToString()) >= numero)
+                                      .Reverse().ToList();
+           
+            return rowSelected;
         }
     }
 }

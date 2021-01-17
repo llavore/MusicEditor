@@ -70,12 +70,28 @@ namespace MusicEditor.Forms.Forms
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            _music.number = (int) NumBoxNumero.Value;
-            _music.category = cmbCategoria.SelectedItem.ToString();
-            _music.group = cmbGrupo.SelectedItem.ToString();
-            _music.title = txtNombre.Text;
-            _api.ModificarMusica(_music.toArray());
-            this.Close();
+            if (validarInformacion())
+            {
+                _music.number = (int)NumBoxNumero.Value;
+                _music.category = cmbCategoria.SelectedItem.ToString();
+                _music.group = cmbGrupo.SelectedItem.ToString();
+                _music.title = txtNombre.Text;
+                _api.ModificarMusica(_music.toArray());
+                this.Close();
+            }
+            else
+            {
+                MessageHelper.ErrorMessage("El campo nombre no debe quedar vacio.");
+            }
+        }
+
+        private bool validarInformacion()
+        {
+            bool validacion = true;
+
+            if ( txtNombre.Text.Length <= 0) { validacion = false; }
+            
+            return validacion;
         }
     }
 }
