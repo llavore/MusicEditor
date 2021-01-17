@@ -1,4 +1,5 @@
 ﻿using MusicEditor.Bussines.APIs;
+using MusicEditor.Bussines.Models;
 using MusicEditor.Forms.Forms;
 using MusicEditor.Helpers;
 using MusicEditor.Ressources;
@@ -20,12 +21,12 @@ namespace MusicEditor.Forms
         private IMusicApi _api;
         private Boolean _activated;
 
-        public FormGestion(string path)
+        public FormGestion(string path, MusicAPI api)
         {
             InitializeComponent();
             this.Text = Nombres.FormGestion;
             _path = path;
-            _api = new MusicAPI(_path);
+            _api = api;
             _activated = false;
 
         }
@@ -34,10 +35,10 @@ namespace MusicEditor.Forms
 
             if(_api.totalMusica() > 0) { 
                
-                gridMusicaCorrecta.LoadData(_api.ObtenerTodosCorrectos());
+                gridMusicaCorrecta.LoadData<Music>(_api.ObtenerTodosCorrectos());
                 gridMusicaCorrecta.GridStyleMusicaCorrecta();
 
-                gridMusicaIncorrecta.LoadData(_api.ObtenerTodosIncorrectos());
+                gridMusicaIncorrecta.LoadData<Music>(_api.ObtenerTodosIncorrectos());
                 gridMusicaIncorrecta.GridStyleMusicaIncorrecta();
             }
             else
@@ -61,7 +62,6 @@ namespace MusicEditor.Forms
                 if (result && dialog.ShowDialog() == DialogResult.OK)
                 {
                     _path = dialog.SelectedPath;
-                    _api = new MusicAPI(_path);
                     configuracionInicial();
                 }
             }

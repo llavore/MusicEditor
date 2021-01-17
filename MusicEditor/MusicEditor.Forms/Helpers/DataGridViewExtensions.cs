@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Linq.Expressions;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -36,6 +38,7 @@ namespace MusicEditor.Helpers
         {
             int width = dataGrid.Width / 10;
 
+           
             dataGrid.Columns[0].Visible = false;
             dataGrid.Columns[1].Visible = false;
             dataGrid.Columns[2].Visible = false;
@@ -48,6 +51,15 @@ namespace MusicEditor.Helpers
 
 
             return dataGrid;
+        }
+
+        private static DataGridViewColumn AddColumn<TModel>(Expression<Func<TModel, object>> property) {
+            
+            
+            DataGridViewColumn column = new DataGridViewColumn();
+            column.Name = property.Name;
+            column.HeaderText = property.Name;
+            return column;
         }
 
         public static DataGridView addColumnButton(this DataGridView dataGrid, string NameButton) {
@@ -103,6 +115,17 @@ namespace MusicEditor.Helpers
             dataGrid.ClearColumns();
             BindingSource bs = new BindingSource();
             bs.DataSource = dades;
+            dataGrid.DataSource = bs;
+            dataGrid.addColumnButton("Modificar").addColumnButton("Eliminar");
+            dataGrid.ClearSelection();
+            return dataGrid;
+        }
+
+        public static DataGridView LoadData<TModel>(this DataGridView dataGrid, List<TModel> datos)
+        {
+            dataGrid.ClearColumns();
+            BindingSource bs = new BindingSource();
+            bs.DataSource = datos;
             dataGrid.DataSource = bs;
             dataGrid.addColumnButton("Modificar").addColumnButton("Eliminar");
             dataGrid.ClearSelection();

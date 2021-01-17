@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MusicEditor.Forms.Injection;
+using Ninject;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -8,6 +10,8 @@ namespace MusicEditor.Forms
 {
     static class Program
     {
+        public static StandardKernel Ninject = new StandardKernel(new NinjectInjection());
+
         /// <summary>
         /// Punto de entrada principal para la aplicación.
         /// </summary>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MusicEditor.Bussines.Models;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.IO;
@@ -12,10 +13,12 @@ namespace MusicEditor.Bussines.APIs
 
     public interface IMusicApi
     {
-        void LoadMusic();
+        Music GetOne(string category, int number);
+
+        void LoadMusic(String path);
         DataTable ObtenerTodos();
-        DataView ObtenerTodosCorrectos();
-        DataView ObtenerTodosIncorrectos();
+        List<Music> ObtenerTodosCorrectos();
+        List<Music> ObtenerTodosIncorrectos();
         List<String> ObtenerGrupos();
         List<String> ObtenerCategorias();
         DataRow ObtenerMusica(string path);
@@ -23,12 +26,14 @@ namespace MusicEditor.Bussines.APIs
         List<DataRow> SeleccionarMusicaAPartirDeUnNumero(string categoria, int numero);
         int totalMusicaCategoria(string categoria);
 
+        void ModificarMusica(string[] liniaModificada);
         DataRow NuevaLinea();
 
         int totalMusica();
         List<String[]> CantidadMusicaCategoria();
 
-        void ModificarMusica(string[] liniaModificada);
+        void clear();
+
     }
 
     public enum MusicColumns
@@ -42,266 +47,96 @@ namespace MusicEditor.Bussines.APIs
     }
     public class MusicAPI : IMusicApi
     {
-        private DataTable _table;
-        private String _path;
+        private readonly IRepositoryManager _repositoryManager;
 
-        public MusicAPI(string path)
+        public MusicAPI(IRepositoryManager repositoryManager)
         {
-            _table = new DataTable();
-
-            DataColumn[] columnKey = new DataColumn[2];
-            DataColumn keyNumber= new DataColumn();
-            keyNumber.DataType = System.Type.GetType("System.Int32"); 
-            keyNumber.ColumnName = "Number";
-
-            DataColumn keyCategory = new DataColumn();
-            keyCategory.ColumnName = "Category";
-
-            _table.Columns.Add(keyCategory);
-            _table.Columns.Add(keyNumber);
-            _table.Columns.Add("Title");
-            _table.Columns.Add("Group");
-            _table.Columns.Add("State");
-            _table.Columns.Add("Path");
-
-            columnKey[0] = keyCategory;
-            columnKey[1] = keyNumber;
-
-            _table.PrimaryKey = columnKey;
-            _path = path;
-            LoadMusic();
+            _repositoryManager = repositoryManager;
         }
 
-        /*public void LoadMusic()
+        public List<string[]> CantidadMusicaCategoria()
         {
-            var allFiles = Directory.GetFiles(_path, "*.mp3", SearchOption.AllDirectories);
-            int countMusicaIncorrecta = 1;
-            if (allFiles.Length > 0)
-            {
-                var musicList = allFiles.ToList();
-                FileInfo file;
-                Regex r = new Regex(@"([A-Z]{3}[0-9]{3}([ ])-([ ])([\S, ]+)([ ])-([ ])([\S, ]+).mp3)");
-                foreach (var path in musicList)
-                {
-                    file = new FileInfo(path);
-                    DataRow row;
-                    //Console.WriteLine(file.Name +( r.IsMatch(file.Name) ? " correcte" : " incorrecte"));
-
-                    //String[] items = new String[6];
-                    //items[(int)MusicColumns.Path] = file.FullName;
-
-                    MusicView musicFile;
-
-                    if (r.IsMatch(file.Name))
-                    {
-                        
-
-                        var NameSeparate = file.Name.Split('-');
-                        musicFile = new MusicView(NameSeparate[0].Substring(0, 3).Trim());
-
-                        items[(int)MusicColumns.Category] = NameSeparate[0].Substring(0, 3).Trim();
-                        items[(int)MusicColumns.Group] = NameSeparate[2].Split('.')[0].Trim();
-                        items[(int)MusicColumns.Number] = NameSeparate[0].Substring(3, 4).Trim();
-                        items[(int)MusicColumns.Title] = NameSeparate[1].Trim().Trim();
-                        items[(int)MusicColumns.State] = Boolean.TrueString;
-
-                    }
-                    else
-                    {
-                        items[(int)MusicColumns.Category] = "---";
-                        items[(int)MusicColumns.Group] = "---";
-                        items[(int)MusicColumns.Number] = countMusicaIncorrecta.ToString();
-                        items[(int)MusicColumns.Title] = "---";
-                        items[(int)MusicColumns.State] = Boolean.FalseString;
-                        countMusicaIncorrecta++;
-                    }
-                    row = _table.NewRow();
-                    row.ItemArray = items;
-                    _table.Rows.Add(row);
-                }
-
-
-            }
-
-        }*/
-
-        public void LoadMusic()
-        {
-            var allFiles = Directory.GetFiles(_path, "*.mp3", SearchOption.AllDirectories);
-            int countMusicaIncorrecta = 1;
-            if (allFiles.Length > 0)
-            {
-                var musicList = allFiles.ToList();
-
-
-                FileInfo file;
-                Regex r = new Regex(@"([A-Z]{3}[0-9]{3}([ ])-([ ])([\S, ]+)([ ])-([ ])([\S, ]+).mp3)");
-                foreach (var path in musicList)
-                {
-                    file = new FileInfo(path);
-                    DataRow row;
-                    //Console.WriteLine(file.Name +( r.IsMatch(file.Name) ? " correcte" : " incorrecte"));
-
-                    String[] items = new String[6];
-                    items[(int)MusicColumns.Path] = file.FullName;
-
-                    if (r.IsMatch(file.Name))
-                    {
-
-
-                        var NameSeparate = file.Name.Split('-');
-                        items[(int)MusicColumns.Category] = NameSeparate[0].Substring(0, 3).Trim();
-                        items[(int)MusicColumns.Group] = NameSeparate[2].Split('.')[0].Trim();
-                        items[(int)MusicColumns.Number] = NameSeparate[0].Substring(3, 4).Trim();
-                        items[(int)MusicColumns.Title] = NameSeparate[1].Trim().Trim();
-                        items[(int)MusicColumns.State] = Boolean.TrueString;
-
-                    }
-                    else
-                    {
-                        items[(int)MusicColumns.Category] = "unkown";
-                        items[(int)MusicColumns.Group] = "---";
-                        items[(int)MusicColumns.Number] = countMusicaIncorrecta.ToString();
-                        items[(int)MusicColumns.Title] = "---";
-                        items[(int)MusicColumns.State] = Boolean.FalseString;
-                        countMusicaIncorrecta++;
-                    }
-                    row = _table.NewRow();
-                    row.ItemArray = items;
-                    _table.Rows.Add(row);
-                }
-
-
-            }
-
+            throw new NotImplementedException();
         }
 
-
-
-        public List<string> ObtenerGrupos()
+        public void clear()
         {
-
-            List<string> grupos = _table.AsEnumerable().Where(x => x.ItemArray[(int)MusicColumns.State].ToString() == Boolean.TrueString)
-                                  .Select(x => x.ItemArray[(int)MusicColumns.Group].ToString()).Distinct().ToList();
-            return grupos;
+          
         }
 
-        public DataTable ObtenerTodos()
+        public Music GetOne(string category, int number)
         {
-            return _table;
+            return _repositoryManager.Musicas
+                   .seleccionarUno(x => x.Category == category && x.Number == number);
         }
 
-        public DataView ObtenerTodosCorrectos()
+        public void LoadMusic(String path)
         {
-            DataView dv = new DataView(_table);
-            dv.RowFilter = "State = " + Boolean.TrueString;
-            dv.Sort = "Category, Number ";
-            return dv;
-        }
+            _repositoryManager.Musicas.Clear();
 
-        public DataView ObtenerTodosIncorrectos()
-        {
-            DataView dv = new DataView(_table);
-            dv.RowFilter = "State = " + Boolean.FalseString;
-            dv.Sort = "Category, Number ";
-            return dv;
-        }
 
-        public int totalMusica()
-        {
-            return _table.AsEnumerable().Count();
-        }
 
-        public List<String[]> CantidadMusicaCategoria()
-        {
-            var list = _table.AsEnumerable().GroupBy(x => x.ItemArray[(int)MusicColumns.Category])
-                .Select(x => new String[2] { x.Key.ToString(), x.ToList().Count().ToString() }).ToList();
-            return list;
-        }
-
-        public DataRow ObtenerMusica(string path)
-        {
-            DataRow rowSelected = _table.AsEnumerable().Where(x => x.ItemArray[(int)MusicColumns.Path] == path)
-                                    .FirstOrDefault();
-
-            return rowSelected;
-        }
-
-        public DataRow ObtenerMusica(string categoria, int numero)
-        {
-            /* DataRow rowSelected = _table.AsEnumerable()
-                                     .Where(x => x.ItemArray[(int)MusicColumns.Category] == categoria &&
-                                      Int32.Parse(x.ItemArray[(int)MusicColumns.Number].ToString()) == 33)
-                                     .FirstOrDefault();*/
-
-            DataRow rowSelected = _table.AsEnumerable()
-                                    .Where(x => x.ItemArray[0].ToString() == categoria &&
-                                     Int32.Parse(x.ItemArray[1].ToString()) == numero)
-                                    .FirstOrDefault();
-
-            return rowSelected;
-        }
-
-        public List<string> ObtenerCategorias()
-        {
-            List<string> categorias = _table.AsEnumerable().Where(x => x.ItemArray[(int)MusicColumns.State].ToString() == Boolean.TrueString)
-                                  .Select(x => x.ItemArray[(int)MusicColumns.Category].ToString()).Distinct().ToList();
-            return categorias;
-        }
-
-        public int totalMusicaCategoria(string categoria)
-        {
-            var list = _table.AsEnumerable().Where(x => x.ItemArray[(int)MusicColumns.Category].ToString() == categoria)
-                .Count();
-            return list;
+            throw new NotImplementedException();
         }
 
         public void ModificarMusica(string[] liniaModificada)
         {
-            bool state = Boolean.Parse(liniaModificada[(int)MusicColumns.State].ToString());
-            if (state) {
-                DataRow lineaOriginal = ObtenerMusica(liniaModificada[(int)MusicColumns.Path].ToString());
-                DataRow lineaExistente = ObtenerMusica(liniaModificada[(int)MusicColumns.Category].ToString(),
-                   Int32.Parse(liniaModificada[(int)MusicColumns.Number].ToString()));
-                if (!Boolean.Parse(lineaOriginal[(int)MusicColumns.State].ToString()) && lineaExistente == null)
-                {
-                    lineaOriginal.ItemArray = liniaModificada;
-                }
-                else if (!Boolean.Parse(lineaOriginal[(int)MusicColumns.State].ToString()) && lineaExistente != null)
-                {
-                   
-                    List<DataRow> listaMod = SeleccionarMusicaAPartirDeUnNumero(liniaModificada[(int)MusicColumns.Category].ToString(), Int32.Parse(liniaModificada[(int)MusicColumns.Number].ToString()));
-                    listaMod.ForEach(
-                        x => {
-                            //Console.WriteLine(x.ItemArray[(int)MusicColumns.Category].ToString()+ " "+ x.ItemArray[(int)MusicColumns.Number].ToString());
-                            var array = x.ItemArray.ToList();
-                            array[1] = Int32.Parse(x.ItemArray[1].ToString()) + 1 ;
-                            x.ItemArray = array.ToArray();
-                        });
-                    lineaExistente = null;
-                    lineaOriginal.ItemArray = liniaModificada;
-                }
-            }
+            throw new NotImplementedException();
         }
 
         public DataRow NuevaLinea()
         {
-            
-            return _table.NewRow();
+            throw new NotImplementedException();
         }
 
-        public  List<DataRow> SeleccionarMusicaAPartirDeUnNumero(string categoria, int numero)
+        public List<string> ObtenerCategorias()
         {
-            DataView dv = _table.DefaultView;
-            dv.Sort = "Category, Number ";
-            _table = dv.ToTable();
+            throw new NotImplementedException();
+        }
 
-            var rowSelected = _table.AsEnumerable()
-                                      .Where(x => x.ItemArray[0].ToString() == categoria &&
-                                       Int32.Parse(x.ItemArray[1].ToString()) >= numero)
-                                      .Reverse().ToList();
-           
-            return rowSelected;
+        public List<string> ObtenerGrupos()
+        {
+            throw new NotImplementedException();
+        }
+
+        public DataRow ObtenerMusica(string path)
+        {
+            throw new NotImplementedException();
+        }
+
+        public DataRow ObtenerMusica(string categoria, int numero)
+        {
+            throw new NotImplementedException();
+        }
+
+        public DataTable ObtenerTodos()
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Music> ObtenerTodosCorrectos()
+        {
+            return _repositoryManager.Musicas.seleccionarMusica(x => x.State == true);
+        }
+
+        public List<Music> ObtenerTodosIncorrectos()
+        {
+            return _repositoryManager.Musicas.seleccionarMusica(x => x.State == false);
+        }
+
+        public List<DataRow> SeleccionarMusicaAPartirDeUnNumero(string categoria, int numero)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int totalMusica()
+        {
+            return _repositoryManager.Musicas.GetAll().Count;
+        }
+
+        public int totalMusicaCategoria(string categoria)
+        {
+            throw new NotImplementedException();
         }
     }
 }

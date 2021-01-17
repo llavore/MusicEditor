@@ -15,3 +15,10 @@ C:\Users\mLlav\OneDrive\Documentos\GitHub\MusicEditor\MusicEditor\MusicEditor.Fo
 C:\Users\mLlav\OneDrive\Documentos\GitHub\MusicEditor\MusicEditor\MusicEditor.Forms\bin\Debug\MusicEditor.Ressources.dll
 C:\Users\mLlav\OneDrive\Documentos\GitHub\MusicEditor\MusicEditor\MusicEditor.Forms\bin\Debug\MusicEditor.Ressources.pdb
 C:\Users\mLlav\OneDrive\Documentos\GitHub\MusicEditor\MusicEditor\MusicEditor.Forms\obj\Debug\MusicEditor.Forms.Forms.FormMusic.resources
+C:\Users\mLlav\OneDrive\Documentos\GitHub\MusicEditor\MusicEditor\MusicEditor.Forms\bin\Debug\EntityFramework.dll
+C:\Users\mLlav\OneDrive\Documentos\GitHub\MusicEditor\MusicEditor\MusicEditor.Forms\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\mLlav\OneDrive\Documentos\GitHub\MusicEditor\MusicEditor\MusicEditor.Forms\bin\Debug\Ninject.dll
+C:\Users\mLlav\OneDrive\Documentos\GitHub\MusicEditor\MusicEditor\MusicEditor.Forms\bin\Debug\MusicEditor.Bussines.dll.config
+C:\Users\mLlav\OneDrive\Documentos\GitHub\MusicEditor\MusicEditor\MusicEditor.Forms\bin\Debug\EntityFramework.xml
+C:\Users\mLlav\OneDrive\Documentos\GitHub\MusicEditor\MusicEditor\MusicEditor.Forms\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\mLlav\OneDrive\Documentos\GitHub\MusicEditor\MusicEditor\MusicEditor.Forms\bin\Debug\Ninject.xml

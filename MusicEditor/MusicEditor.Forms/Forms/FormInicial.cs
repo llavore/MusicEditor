@@ -1,5 +1,7 @@
 ﻿
 using MusicEditor.Ressources;
+using Ninject;
+using Ninject.Parameters;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -23,9 +25,11 @@ namespace MusicEditor.Forms
         {
             using (var dialog = new FolderBrowserDialog()) {
                 if (dialog.ShowDialog() == DialogResult.OK) {
-                    String SelectedPath = dialog.SelectedPath;
-                    var formGestion = new FormGestion(SelectedPath);
-                    formGestion.ShowDialog();
+                    String selectedPath = dialog.SelectedPath;
+                    using (var form = Program.Ninject.Get<FormGestion>(new ConstructorArgument("path", selectedPath))) {
+                        form.ShowDialog();
+                        
+                    }
                 }
             }
         }
