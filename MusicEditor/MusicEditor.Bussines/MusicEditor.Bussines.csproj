@@ -52,11 +52,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="APIs\MusicAPI.cs" />
+    <Compile Include="Data\ClassesDb.cs" />
+    <Compile Include="Data\DbContext.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Data\Repository.cs" />
+    <Compile Include="Data\RepositoryManager.cs" />
     <Compile Include="Helpers\MusicHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

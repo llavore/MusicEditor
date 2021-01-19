@@ -30,7 +30,7 @@ namespace MusicEditor.Forms.Models
         public MusicView(DataRow row)
         {
             path = row.ItemArray[(int)MusicColumns.Path].ToString();
-            state = Boolean.Parse(row.ItemArray[(int)MusicColumns.State].ToString());
+            state = row.ItemArray[(int)MusicColumns.Category].ToString() != MusicAPI.CategoryUnkown;
             if (state)
             {
                 category = row.ItemArray[(int)MusicColumns.Category].ToString();
@@ -47,14 +47,13 @@ namespace MusicEditor.Forms.Models
             }
         }
 
-        public string[] toArray() {
-            string[] array = new string[6];
+        public Object[] toArray() {
+            Object[] array = new Object[5];
             array[0] = (category != null) ? category : "---";
             array[1] = number.ToString() ;
             array[2] = (title != null ) ? title : "---"; 
             array[3] = (group != null) ? group : "---";
-            array[4] = Boolean.TrueString;
-            array[5] = path;
+            array[4] = path;
             return array;
         }
     }
