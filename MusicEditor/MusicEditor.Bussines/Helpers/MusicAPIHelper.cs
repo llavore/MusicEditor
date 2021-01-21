@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MusicEditor.Bussines.APIs;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -6,9 +7,9 @@ using System.Text;
 
 namespace MusicEditor.Bussines.Helpers
 {
-    class MusicHelper
+    static class MusicAPIHelper
     {
-        public static string IncluirCeros(String num, int quantitatXifres)
+        public static string IncluirCeros(  String num, int quantitatXifres)
         {
             if (num.Length < quantitatXifres)
             {
@@ -17,6 +18,7 @@ namespace MusicEditor.Bussines.Helpers
             return num;
         }
 
-        
+       
+
     }
 }

@@ -12,6 +12,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static MusicEditor.Forms.Models.MusicView;
 
 namespace MusicEditor.Forms.Forms
 {
@@ -20,11 +21,11 @@ namespace MusicEditor.Forms.Forms
         readonly private MusicView _music;
         readonly private IMusicApi _api;
         
-        public FormMusic(DataRow row, IMusicApi api)
+        public FormMusic(MusicView row)
         {
             InitializeComponent();
-            _music = new MusicView(row);
-            _api = api;
+            _music = row;
+            _api = new MusicAPI(AplicationContext.AplicationContext._repositoryManager);
         }
 
         private void FormMusic_Load(object sender, EventArgs e)
@@ -33,7 +34,7 @@ namespace MusicEditor.Forms.Forms
             txtPath.ReadOnly = true;
             List<string> listaCategorias = _api.ObtenerCategorias();
             List<string> listaGrupos = _api.ObtenerGrupos();
-            if (_music.state)
+            if (_music.state is MusicRowState.correct)
             {
                 txtNombre.Text = _music.title;
                 cmbCategoria.CargarCombo(listaCategorias, _music.category);
@@ -48,19 +49,20 @@ namespace MusicEditor.Forms.Forms
 
         private void cmbCategoria_SelectedIndexChanged(object sender, EventArgs e)
         {
+            Decimal numeroActual = NumBoxNumero.Value;
             string categorySelected = cmbCategoria.SelectedItem.ToString();
-            int numeroTotalCategoria = _api.totalMusicaCategoria(categorySelected);
-            NumBoxNumero.Maximum = numeroTotalCategoria+1;
-            NumBoxNumero.Minimum = 0;
-            
-            if (_music.category == categorySelected && _music.state)
+            NumBoxNumero.Maximum = _api.totalMusicaCategoria(categorySelected) + 1;
+            NumBoxNumero.Minimum = 1;
+
+            if (_music.category == categorySelected)
             {
                 NumBoxNumero.Value = _music.number;
             }
-            else 
+            else if(_music.category != categorySelected) 
             {
                 NumBoxNumero.Value = NumBoxNumero.Maximum;
             }
+
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
@@ -76,7 +78,7 @@ namespace MusicEditor.Forms.Forms
                 _music.category = cmbCategoria.SelectedItem.ToString();
                 _music.group = cmbGrupo.SelectedItem.ToString();
                 _music.title = txtNombre.Text;
-                _api.ModificarMusica(_music.toArray());
+                _api.ModificarMusica(_music);
                 this.Close();
             }
             else

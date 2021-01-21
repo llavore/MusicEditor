@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AplicationContext\AplicationContext.cs" />
     <Compile Include="Forms\FormGestion.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -67,7 +68,6 @@
     <Compile Include="Helpers\ComboBoxExtensions.cs" />
     <Compile Include="Helpers\DataGridViewExtensions.cs" />
     <Compile Include="Helpers\MessageHelper.cs" />
-    <Compile Include="Models\MusicView.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\FormGestion.resx">

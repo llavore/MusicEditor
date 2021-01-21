@@ -24,7 +24,8 @@ namespace MusicEditor.Forms
             using (var dialog = new FolderBrowserDialog()) {
                 if (dialog.ShowDialog() == DialogResult.OK) {
                     String SelectedPath = dialog.SelectedPath;
-                    var formGestion = new FormGestion(SelectedPath);
+                    AplicationContext.AplicationContext.LoadData(SelectedPath);
+                    var formGestion = new FormGestion();
                     formGestion.ShowDialog();
                 }
             }

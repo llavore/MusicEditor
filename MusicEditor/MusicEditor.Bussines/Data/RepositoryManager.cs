@@ -9,14 +9,15 @@ namespace MusicEditor.Bussines.Data
     public interface IRepositoryManager : IDisposable
     {
         int SaveChanges();
-
-        IRepository<MusicasDataTable> Musicas { get;}
+        IRepository<MusicasDataTable> Musica { get; }
+       
+        
     }
     public class RepositoryManager : IRepositoryManager
     {
         private MusicContext _context;
-        public  IRepository<MusicasDataTable> _musica;
-
+        private IRepository<MusicasDataTable> _musica;
+      
         public RepositoryManager(MusicContext musicContext,
                                  IRepository<MusicasDataTable> musica)
         {
@@ -24,9 +25,8 @@ namespace MusicEditor.Bussines.Data
             _context = musicContext;
         }
 
-        
 
-        public IRepository<MusicasDataTable> IRepositoryManager.Musicas => throw new NotImplementedException();
+        public IRepository<MusicasDataTable> Musica => _musica;
 
         public void Dispose()
         {
