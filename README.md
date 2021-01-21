@@ -1,2 +1,4 @@
 # MusicEditor
-MusicEditor permet gestionar els fitxers de musica d'una carpeta.( o bé les que tinguis en el teu usb)
+MusicEditor permite gestionar los fitcheros de musica de una carpeta. (O bien las que se puedan tener en otros dispositivos como USB.)
+
+
