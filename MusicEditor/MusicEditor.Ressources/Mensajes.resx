@@ -126,6 +126,9 @@
   <data name="FuncionNoImplementada" xml:space="preserve">
     <value>Esta función aun no ha sido implementada</value>
   </data>
+  <data name="ModificacionesGuardadas" xml:space="preserve">
+    <value>Todos los cambios realizados han sigo guardados correctamente.</value>
+  </data>
   <data name="SinFicherosMusica" xml:space="preserve">
     <value>Lo sentimos, no hemos encontrado canciones para mostrar.</value>
   </data>

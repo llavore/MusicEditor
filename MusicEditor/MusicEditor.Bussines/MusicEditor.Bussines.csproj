@@ -43,6 +43,7 @@
       <Private>True</Private>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -52,11 +53,27 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="APIs\MusicAPI.cs" />
-    <Compile Include="Helpers\MusicHelper.cs" />
+    <Compile Include="Data\ClassesDb.cs" />
+    <Compile Include="Data\MusicContext.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Data\MusicasDataTable.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Data\Repository.cs" />
+    <Compile Include="Data\RepositoryManager.cs" />
+    <Compile Include="Helpers\DataRowHelper.cs" />
+    <Compile Include="Helpers\MusicAPIHelper.cs" />
+    <Compile Include="Models\MusicView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Data\MusicContext.resx">
+      <DependentUpon>MusicContext.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

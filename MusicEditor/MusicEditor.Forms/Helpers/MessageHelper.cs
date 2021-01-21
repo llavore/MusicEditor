@@ -27,5 +27,10 @@ namespace MusicEditor.Helpers
             DialogResult result = MessageBox.Show(msg, title, MessageBoxButtons.YesNo, icon);
             return (result is DialogResult.Yes) ? true : false;
         }
+
+        internal static void InfoMessage(object modificacionesGuardadas)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

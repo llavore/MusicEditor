@@ -43,6 +43,8 @@ namespace MusicEditor.Forms
             this.lblMusicaIncorrecta = new System.Windows.Forms.Label();
             this.toolAcciones = new System.Windows.Forms.ToolStrip();
             this.btnSave = new System.Windows.Forms.ToolStripButton();
+            this.StatusBar = new System.Windows.Forms.StatusStrip();
+            this.LabelModificacies = new System.Windows.Forms.ToolStripStatusLabel();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridMusicaCorrecta)).BeginInit();
             this.tabMusica.SuspendLayout();
@@ -50,6 +52,7 @@ namespace MusicEditor.Forms
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridMusicaIncorrecta)).BeginInit();
             this.toolAcciones.SuspendLayout();
+            this.StatusBar.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -112,7 +115,7 @@ namespace MusicEditor.Forms
             this.tabMusica.Location = new System.Drawing.Point(24, 129);
             this.tabMusica.Name = "tabMusica";
             this.tabMusica.SelectedIndex = 0;
-            this.tabMusica.Size = new System.Drawing.Size(907, 437);
+            this.tabMusica.Size = new System.Drawing.Size(907, 397);
             this.tabMusica.TabIndex = 2;
             // 
             // tabPage1
@@ -122,7 +125,7 @@ namespace MusicEditor.Forms
             this.tabPage1.Location = new System.Drawing.Point(4, 25);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(899, 408);
+            this.tabPage1.Size = new System.Drawing.Size(899, 368);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Musica Correcta";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -143,7 +146,7 @@ namespace MusicEditor.Forms
             this.tabPage2.Location = new System.Drawing.Point(4, 25);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(899, 408);
+            this.tabPage2.Size = new System.Drawing.Size(899, 368);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Musica Incorrecta";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -192,11 +195,28 @@ namespace MusicEditor.Forms
             this.btnSave.Text = "toolStripButton1";
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
+            // StatusBar
+            // 
+            this.StatusBar.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.StatusBar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.LabelModificacies});
+            this.StatusBar.Location = new System.Drawing.Point(0, 541);
+            this.StatusBar.Name = "StatusBar";
+            this.StatusBar.Size = new System.Drawing.Size(957, 22);
+            this.StatusBar.TabIndex = 4;
+            this.StatusBar.Text = "statusStrip1";
+            // 
+            // LabelModificacies
+            // 
+            this.LabelModificacies.Name = "LabelModificacies";
+            this.LabelModificacies.Size = new System.Drawing.Size(0, 16);
+            // 
             // FormGestion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(957, 576);
+            this.ClientSize = new System.Drawing.Size(957, 563);
+            this.Controls.Add(this.StatusBar);
             this.Controls.Add(this.toolAcciones);
             this.Controls.Add(this.tabMusica);
             this.Controls.Add(this.groupBox1);
@@ -216,6 +236,8 @@ namespace MusicEditor.Forms
             ((System.ComponentModel.ISupportInitialize)(this.gridMusicaIncorrecta)).EndInit();
             this.toolAcciones.ResumeLayout(false);
             this.toolAcciones.PerformLayout();
+            this.StatusBar.ResumeLayout(false);
+            this.StatusBar.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -236,5 +258,7 @@ namespace MusicEditor.Forms
         private System.Windows.Forms.ToolStrip toolAcciones;
         private System.Windows.Forms.ToolStripButton btnSave;
         private System.Windows.Forms.DataGridView gridMusicaIncorrecta;
+        private System.Windows.Forms.StatusStrip StatusBar;
+        private System.Windows.Forms.ToolStripStatusLabel LabelModificacies;
     }
 }

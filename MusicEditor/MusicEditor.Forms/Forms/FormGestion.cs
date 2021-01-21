@@ -20,15 +20,15 @@ namespace MusicEditor.Forms
         private IMusicApi _api;
         private Boolean _activated;
 
-        public FormGestion(string path)
+        public FormGestion()
         {
             InitializeComponent();
             this.Text = Nombres.FormGestion;
-            _path = path;
-            _api = new MusicAPI(_path);
+            _api = new MusicAPI(AplicationContext.AplicationContext._repositoryManager);
+            LabelModificacies.Text = "Cambios realizados: " + _api.hasChange();
             _activated = false;
-
         }
+
         private void configuracionInicial() {
             txtPathFolder.Text = _path;
 
@@ -39,6 +39,7 @@ namespace MusicEditor.Forms
 
                 gridMusicaIncorrecta.LoadData(_api.ObtenerTodosIncorrectos());
                 gridMusicaIncorrecta.GridStyleMusicaIncorrecta();
+                LabelModificacies.Text = "Cambios realizados: " + _api.hasChange();
             }
             else
             {
@@ -48,6 +49,9 @@ namespace MusicEditor.Forms
             }
 
         }
+
+
+ 
         private void FormGestion_Load(object sender, EventArgs e)
         {
             configuracionInicial();
@@ -61,7 +65,8 @@ namespace MusicEditor.Forms
                 if (result && dialog.ShowDialog() == DialogResult.OK)
                 {
                     _path = dialog.SelectedPath;
-                    _api = new MusicAPI(_path);
+                    AplicationContext.AplicationContext.LoadData(_path);
+                    _api = new MusicAPI(AplicationContext.AplicationContext._repositoryManager);
                     configuracionInicial();
                 }
             }
@@ -75,10 +80,9 @@ namespace MusicEditor.Forms
                 if (btn.Value.ToString() == "Modificar")
                 {
                     //int indexColumn = gridMusicaIncorrecta.Columns.
-                    string path = "";
-                    DataRow dr = _api.ObtenerMusica(path);
-                    FormMusic formMusic = new FormMusic(dr, _api);
-                    formMusic.ShowDialog();
+                    int columnPath = gridMusicaCorrecta.Columns["Path"].Index;
+                    string path = gridMusicaCorrecta.Rows[e.RowIndex].Cells[columnPath].Value.ToString();
+                    OpenFormMusic(path);
                 }
 
                 if (btn.Value.ToString() == "Eliminar")
@@ -96,7 +100,8 @@ namespace MusicEditor.Forms
             {
                 if (btn.Value.ToString() == "Modificar") 
                 {
-                    string path = gridMusicaCorrecta.Rows[e.RowIndex].Cells[5].Value.ToString();
+                    int columnPath = gridMusicaCorrecta.Columns["Path"].Index;
+                    string path = gridMusicaCorrecta.Rows[e.RowIndex].Cells[columnPath].Value.ToString();
                     OpenFormMusic(path);
                 }
                 else if (btn.Value.ToString() == "Eliminar")
@@ -109,7 +114,18 @@ namespace MusicEditor.Forms
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            MessageHelper.InfoMessage(Mensajes.FuncionNoImplementada);
+            //MessageHelper.InfoMessage(Mensajes.FuncionNoImplementada);
+            try
+            {
+                _api.SaveAll();
+                LabelModificacies.Text = "Cambios realizados: " + _api.hasChange();
+                MessageHelper.InfoMessage(Mensajes.ModificacionesGuardadas);
+            }
+            catch (Exception t)
+            {
+                LabelModificacies.Text = "Cambios realizados: " + _api.hasChange();
+                MessageHelper.InfoMessage(t.Message);
+            }
         }
 
         private void gridMusicaIncorrecta_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
@@ -120,7 +136,8 @@ namespace MusicEditor.Forms
             {
                 if (btn.Value.ToString() == "Modificar")
                 {
-                    string path = gridMusicaIncorrecta.Rows[e.RowIndex].Cells[7].Value.ToString();
+                    int columnPath = gridMusicaIncorrecta.Columns["Path"].Index;
+                    string path = gridMusicaIncorrecta.Rows[e.RowIndex].Cells[columnPath].Value.ToString();
                     OpenFormMusic(path);
 
                 }
@@ -136,21 +153,14 @@ namespace MusicEditor.Forms
         {
             if (_activated)
             {
-                gridMusicaCorrecta.LoadData(_api.ObtenerTodosCorrectos());
-                gridMusicaCorrecta.GridStyleMusicaCorrecta();
-
-                gridMusicaIncorrecta.LoadData(_api.ObtenerTodosIncorrectos());
-                gridMusicaIncorrecta.GridStyleMusicaIncorrecta();
-
+                configuracionInicial();
                 _activated = false;
             }
         }
 
         private void OpenFormMusic(string path) {
             _activated = true;
-
-            DataRow dr = _api.ObtenerMusica(path);
-            FormMusic formMusic = new FormMusic(dr, _api);
+            FormMusic formMusic = new FormMusic(_api.ObtenerMusicaFormatView(path));
             formMusic.ShowDialog();
         }
     }

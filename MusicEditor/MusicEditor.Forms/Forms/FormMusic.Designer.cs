@@ -38,10 +38,10 @@ namespace MusicEditor.Forms.Forms
             this.label5 = new System.Windows.Forms.Label();
             this.NumBoxNumero = new System.Windows.Forms.NumericUpDown();
             this.txtNombre = new System.Windows.Forms.TextBox();
-            this.btnCancelar = new System.Windows.Forms.Button();
-            this.btnGuardar = new System.Windows.Forms.Button();
             this.cmbGrupo = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
+            this.btnCancelar = new System.Windows.Forms.Button();
+            this.btnGuardar = new System.Windows.Forms.Button();
             this.groupMusica.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NumBoxNumero)).BeginInit();
             this.SuspendLayout();
@@ -49,7 +49,7 @@ namespace MusicEditor.Forms.Forms
             // cmbCategoria
             // 
             this.cmbCategoria.FormattingEnabled = true;
-            this.cmbCategoria.Location = new System.Drawing.Point(346, 33);
+            this.cmbCategoria.Location = new System.Drawing.Point(115, 33);
             this.cmbCategoria.Name = "cmbCategoria";
             this.cmbCategoria.Size = new System.Drawing.Size(159, 24);
             this.cmbCategoria.TabIndex = 0;
@@ -58,7 +58,7 @@ namespace MusicEditor.Forms.Forms
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(256, 36);
+            this.label1.Location = new System.Drawing.Point(25, 36);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(73, 17);
             this.label1.TabIndex = 1;
@@ -67,7 +67,7 @@ namespace MusicEditor.Forms.Forms
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(24, 35);
+            this.label2.Location = new System.Drawing.Point(289, 35);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(62, 17);
             this.label2.TabIndex = 2;
@@ -122,7 +122,7 @@ namespace MusicEditor.Forms.Forms
             // 
             // NumBoxNumero
             // 
-            this.NumBoxNumero.Location = new System.Drawing.Point(116, 33);
+            this.NumBoxNumero.Location = new System.Drawing.Point(381, 33);
             this.NumBoxNumero.Name = "NumBoxNumero";
             this.NumBoxNumero.Size = new System.Drawing.Size(122, 22);
             this.NumBoxNumero.TabIndex = 8;
@@ -133,6 +133,23 @@ namespace MusicEditor.Forms.Forms
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(389, 22);
             this.txtNombre.TabIndex = 7;
+            // 
+            // cmbGrupo
+            // 
+            this.cmbGrupo.FormattingEnabled = true;
+            this.cmbGrupo.Location = new System.Drawing.Point(116, 88);
+            this.cmbGrupo.Name = "cmbGrupo";
+            this.cmbGrupo.Size = new System.Drawing.Size(389, 24);
+            this.cmbGrupo.TabIndex = 5;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(24, 91);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(52, 17);
+            this.label4.TabIndex = 4;
+            this.label4.Text = "Grupo:";
             // 
             // btnCancelar
             // 
@@ -155,23 +172,6 @@ namespace MusicEditor.Forms.Forms
             this.btnGuardar.Text = "Guardar";
             this.btnGuardar.UseVisualStyleBackColor = true;
             this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
-            // 
-            // cmbGrupo
-            // 
-            this.cmbGrupo.FormattingEnabled = true;
-            this.cmbGrupo.Location = new System.Drawing.Point(116, 88);
-            this.cmbGrupo.Name = "cmbGrupo";
-            this.cmbGrupo.Size = new System.Drawing.Size(389, 24);
-            this.cmbGrupo.TabIndex = 5;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(24, 91);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(52, 17);
-            this.label4.TabIndex = 4;
-            this.label4.Text = "Grupo:";
             // 
             // FormMusic
             // 

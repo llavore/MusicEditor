@@ -88,6 +88,15 @@ namespace MusicEditor.Ressources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Todos los cambios realizados han sigo guardados correctamente..
+        /// </summary>
+        public static string ModificacionesGuardadas {
+            get {
+                return ResourceManager.GetString("ModificacionesGuardadas", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Lo sentimos, no hemos encontrado canciones para mostrar..
         /// </summary>
         public static string SinFicherosMusica {
